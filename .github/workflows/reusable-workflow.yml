@@ -21,4 +21,4 @@ jobs:
         if: "${{ env.NOT_SECRET != '' }}"
         run: echo "EXAMPLE_SECRET is present"
         env:
-          NOT_SECRET: ${{ secrets.NOT_SECRET }}
+          NOT_SECRET: ${{ secrets.EXAMPLE_SECRET }}
