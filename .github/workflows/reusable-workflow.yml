@@ -1,0 +1,22 @@
+on:
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+    secrets:
+      EXAMPLE_SECRET:
+        required: true
+
+jobs:
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
+    environment: ci
+    steps:
+      - name: Echo username
+        run: echo "${{ inputs.username }}"
+      - name: Check if secret is present
+        if: "${{ env.NOT_SECRET != '' }}"
+        run: echo "EXAMPLE_SECRET is present"
+        env:
+          NOT_SECRET: ${{ secrets.NOT_SECRET }}
