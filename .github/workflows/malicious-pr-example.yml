@@ -11,4 +11,4 @@ jobs:
     environment: ci
     steps:  
       - name: Attempt to echo secret
-        run: echo "${{ secrets.GITHUB_TOKEN }}"
+        run: echo "${{ secrets.EXAMPLE_SECRET }}"
