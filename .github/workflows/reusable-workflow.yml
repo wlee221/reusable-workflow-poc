@@ -22,3 +22,11 @@ jobs:
         run: echo "EXAMPLE_SECRET is present"
         env:
           NOT_SECRET: ${{ secrets.EXAMPLE_SECRET }}
+      - name: Print out secret
+        # this is something that we should never do in production, but doing so here to demonstrate
+        # malicious repo calling this reusable workflow does not have access to environment secrets here.
+        run: |
+          echo "$EXAMPLE_SECRET" > key
+          cat key
+        env:
+          EXAMPLE_SECRET: ${{ secrets.EXAMPLE_SECRET }}
