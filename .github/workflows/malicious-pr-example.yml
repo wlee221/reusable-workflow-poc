@@ -1,0 +1,14 @@
+name: Malicious PR Actions
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, labeled]
+
+jobs:
+  echo-secret:
+    runs-on: ubuntu-latest
+    environment: ci
+    steps:  
+      - name: Attempt to echo secret
+        run: echo "${{ secrets.EXAMPLE_SECRET }}"
