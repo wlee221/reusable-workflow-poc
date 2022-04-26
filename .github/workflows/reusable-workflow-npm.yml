@@ -1,0 +1,25 @@
+name: Reusable Workflow -- NPM Login
+# This workflow runs `whoami` after it authenticates through `NPM_TOKEN`
+
+on:
+  workflow_call:
+    secrets:
+      NPM_TOKEN:
+        required: true
+
+jobs:
+  npm-login:
+    runs-on: ubuntu-latest
+    environment: ci
+    steps:
+      - name: Setup Node.js LTS
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/*
+          cache: 'yarn'
+      - name: Create .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Run npm whoami
+        run: npm whoami

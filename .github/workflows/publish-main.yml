@@ -1,0 +1,12 @@
+name: Publish main
+# This workflow mocks a npm publish that would happen on main. NPM_TOKEN is used here.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  call-reusable-workflow:
+    uses: wlee221/reusable-workflow-poc/.github/workflows/reusable-workflow-npm.yml@main
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
